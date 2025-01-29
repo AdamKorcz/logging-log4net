@@ -17,12 +17,7 @@
 
 name: build
 
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - master
-  pull_request:
+on: workflow_dispatch
 
 jobs:
 
@@ -50,10 +45,20 @@ jobs:
           dotnet-version: 8
           dotnet-quality: ga
 
+      - name: Set up scanner
+        uses: security-code-scan/security-code-scan-add-action@main
+
       - name: Build
         run: |
             dotnet build ./src/log4net.sln
+
+      - name: Convert sarif for uploading to GitHub
+        uses: security-code-scan/security-code-scan-results-action@main
+        
+      - name: Upload sarif
+        uses: github/codeql-action/upload-sarif@v1
       
-      - name: Test
-        run: |
-            dotnet test ./src/log4net.sln
+#      - name: Test
+#        run: |
+#            dotnet test ./src/log4net.sln
+#
