@@ -33,11 +33,14 @@ jobs:
 #      DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
     steps:
-      - name: Setup nuget
-        uses: nuget/setup-nuget@v1.0.5
 
       - name: Checkout repository
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332   # 4.1.7
+
+      - name: Setup nuget
+        uses: nuget/setup-nuget@v1.0.5
+
+      - uses: microsoft/setup-msbuild@v1.0.2
 
       - name: Set up dotnet
         uses: actions/setup-dotnet@6bd8b7f7774af54e05809fcc5431931b3eb1ddee   # 4.0.1
