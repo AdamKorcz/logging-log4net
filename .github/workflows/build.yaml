@@ -23,14 +23,14 @@ jobs:
 
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
 
-    env:
-      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
-      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+#    env:
+#      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+#      DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
     steps:
       - name: Setup nuget
@@ -46,14 +46,14 @@ jobs:
           dotnet-quality: ga
 
       - name: Set up scanner
-        uses: security-code-scan/security-code-scan-add-action@main
+        uses: security-code-scan/security-code-scan-add-action@v1.2
 
       - name: Build
         run: |
             dotnet build ./src/log4net.sln
 
       - name: Convert sarif for uploading to GitHub
-        uses: security-code-scan/security-code-scan-results-action@main
+        uses: security-code-scan/security-code-scan-results-action@v1
         
       - name: Upload sarif
         uses: github/codeql-action/upload-sarif@v1
