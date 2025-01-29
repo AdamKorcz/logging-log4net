@@ -48,6 +48,9 @@ jobs:
           dotnet-version: 8
           dotnet-quality: ga
 
+      - name: Set up projects
+        uses: security-code-scan/security-code-scan-add-action@main
+
 #      - name: Set up scanner
 #        uses: security-code-scan/security-code-scan-add-action@v1.2
 
