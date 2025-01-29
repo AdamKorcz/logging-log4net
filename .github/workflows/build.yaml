@@ -23,18 +23,18 @@ jobs:
 
   build:
 
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
 
     strategy:
       fail-fast: false
-      matrix:
-        os: [ ubuntu-22.04 ]
 
     env:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
 
     steps:
+      - name: Setup nuget
+        uses: nuget/setup-nuget@v1.0.5
 
       - name: Checkout repository
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332   # 4.1.7
